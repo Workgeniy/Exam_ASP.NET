@@ -1,0 +1,15 @@
+﻿@page
+@using ExamProject.Data.ShopDb
+@model IndexModel
+@inject SignInManager<ApplicationUser> UserInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Магазин бытовой техники";
+}
+
+@if (UserInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div>
+        <a class="btn btn-primary" asp-page="/PagesAdmin/AddProduct">Добавить товар</a>
+    </div>
+}
