@@ -12,13 +12,14 @@ namespace ExamProject.Data.ShopDb {
         [Required]
         public int Quantity { get; set; }
 
-        public int DescriptionId { get; set; }
+        public string? ImagePath { get; set; }   
+
+        public int? DescriptionId { get; set; }
         public Description Description { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public int CartItemId {  get; set; }
-        public CartItem CartItem { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
     }
 }

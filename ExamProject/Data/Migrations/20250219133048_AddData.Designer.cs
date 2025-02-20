@@ -3,6 +3,7 @@ using System;
 using ExamProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250219133048_AddData")]
+    partial class AddData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
@@ -108,17 +111,12 @@ namespace ExamProject.Data.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
@@ -188,14 +186,14 @@ namespace ExamProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CartItemId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DescriptionId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DescriptionId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -208,6 +206,8 @@ namespace ExamProject.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartItemId");
 
                     b.HasIndex("CategoryId");
 
@@ -367,26 +367,30 @@ namespace ExamProject.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ExamProject.Data.ShopDb.Product", "Product")
-                        .WithMany("CartItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Cart");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ExamProject.Data.ShopDb.Product", b =>
                 {
+                    b.HasOne("ExamProject.Data.ShopDb.CartItem", "CartItem")
+                        .WithMany("Products")
+                        .HasForeignKey("CartItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ExamProject.Data.ShopDb.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ExamProject.Data.ShopDb.Description", "Description")
                         .WithMany("Products")
-                        .HasForeignKey("DescriptionId");
+                        .HasForeignKey("DescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartItem");
 
                     b.Navigation("Category");
 
@@ -455,6 +459,11 @@ namespace ExamProject.Data.Migrations
                     b.Navigation("Items");
                 });
 
+            modelBuilder.Entity("ExamProject.Data.ShopDb.CartItem", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("ExamProject.Data.ShopDb.Category", b =>
                 {
                     b.Navigation("Products");
@@ -463,11 +472,6 @@ namespace ExamProject.Data.Migrations
             modelBuilder.Entity("ExamProject.Data.ShopDb.Description", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("ExamProject.Data.ShopDb.Product", b =>
-                {
-                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

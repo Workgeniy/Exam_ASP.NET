@@ -17,6 +17,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating (ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Category>().HasData(
+            new Category { Id = 1, Name = "Телефоны" },
+            new Category { Id = 2, Name = "Телевизоры" },
+            new Category { Id = 3, Name = "Холодильники" });
+
+        modelBuilder.Entity<Description>().HasData(
+            new Description { Id = 1, Name = "Samsung" },
+            new Description { Id = 2, Name = "Toshiba" });
+
         //    // --- Category -> Products (1 : Many) ---
         //    modelBuilder.Entity<Category>()
         //        .HasMany(c => c.Products)

@@ -1,0 +1,37 @@
+﻿@page
+@model ExamProject.Pages.PagesAdmin.ManageUserModel
+<h2>Управление пользователями</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Роль</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users){
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-page="EditUser" asp-route-id="@user.Id">Редактировать</a>
+                </td>
+                @if (!user.IsAdmin)
+                {
+                    <td>
+                        <form method="post" asp-page-handler="GiveToAdmin" asp-route-id="@user.Id" style="display: inline">
+                        <button type="submit" class="btn btn-primary">Сделать админом</button>
+                        </form>
+                </td>
+                }
+                else{
+                    <td>
+                        <form method="post" asp-page-handler="DeleteToAdmin" asp-route-id="@user.Id" style="display: inline">
+                            <button type="submit" class="btn btn-primary">Cнять админа</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

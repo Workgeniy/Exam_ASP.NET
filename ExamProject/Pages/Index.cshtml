@@ -7,6 +7,56 @@
     ViewData["Title"] = "Магазин бытовой техники";
 }
 
+<h2>Список товаров</h2>
+
+@if (UserInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+{
+    <div>
+    <a class="btn btn-primary" asp-page="/PagesBuyer/PageCart">Корзина</a>
+</div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена, руб.</th>
+            <th>Количество</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products) {
+            <tr>
+                <td>
+                <img src="@product.ImagePath" alt="@product.Name" width="75" />
+                </td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                @if (!User.IsInRole("Admin")) {
+                    <td>
+                        <a asp-page="/PagesBuyer/Add" asp-route-id="@product.Id" class="btn btn-primary">Добавить</a>
+                        @* <form method="post" asp-page-handler="AddToCart" asp-route-id="@product.Id">
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </form> *@
+                    </td>
+                }
+                @if (UserInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
+                    <td>
+                    <div>
+                            <a class="btn btn-primary" asp-page="/PagesAdmin/UpdateProduct" asp-route-id="@product.Id">Изменить</a>
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@product.Id" 
+                            onsubmit="return confirm('Удалить товар @product.Name?')">
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </form>
+                    </div>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
 @if (UserInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <div>

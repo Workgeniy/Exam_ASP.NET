@@ -7,9 +7,9 @@ namespace ExamProject.Data.ShopDb {
         [Key]
         public int Id { get; set; }
 
-        public Collection<CartItem> Items { get; set; }
+        public ICollection<CartItem> Items { get; set; }
 
-        public string ApplicationUserId {  get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

@@ -1,0 +1,11 @@
+﻿@page
+@model ExamProject.Pages.PagesBuyer.OrderModel
+<h2>Оформить заказ на сумму @Model.Summa?</h2>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Оформить</button>
+</form>
+
+<div>
+    <a class="btn btn-primary" asp-page="PageCart">Вернуться в корзину</a>
+</div>

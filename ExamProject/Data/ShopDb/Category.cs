@@ -9,6 +9,7 @@ namespace ExamProject.Data.ShopDb {
         [Required]
         public string Name { get; set; }
 
-        public Collection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
+
     }
 }

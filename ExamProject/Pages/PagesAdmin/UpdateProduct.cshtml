@@ -1,13 +1,17 @@
-﻿@page
-@model ExamProject.Pages.PagesAdmin.AddProductModel
+﻿@page "{id:int}"
+@model ExamProject.Pages.PagesAdmin.UpdateProductModel
 @{
-    
 }
+
+<h2>Редактировать товар</h2>
+
+<div asp-validation-summary="All"></div>
+
 <form method="post">
     <div class="form-group">
         <label asp-for="Product.Name">Наименование товара</label>
         <input asp-for="Product.Name" class="form-control" />
-   
+
     </div>
 
     <div class="form-group">
@@ -24,7 +28,7 @@
     <div class="form-group">
         <label asp-for="Product.Quantity">Количество товара</label>
         <input asp-for="Product.Quantity" class="form-control" />
-    
+
     </div>
 
     <div class="form-group">
@@ -55,7 +59,7 @@
         <a class="btn btn-primary" asp-page="AddDescription">Добавить поставщика</a>
     </div>
 
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="submit" class="btn btn-primary">Изменить</button>
     <div>
         <a class="btn btn-primary" asp-page="/Index">Назад</a>
     </div>
