@@ -20,12 +20,22 @@ public class IndexModel : PageModel
         this.context = context;
     }
 
+    [BindProperty(SupportsGet = true)]
+    public string SearchQuery { get; set; }
 
     public List<Product> Products { get; set; }
 
 
-    public void OnGet () {
-        Products = context.Products.ToList();
+    public async void OnGet () {
+        IQueryable<Product> query = context.Products
+            .Include(p => p.Category);
+
+        // Если введён запрос, фильтруем товары
+        if (!string.IsNullOrEmpty(SearchQuery)) {
+            query = query.Where(p => p.Name.Contains(SearchQuery) || p.Category.Name.Contains(SearchQuery));
+        }
+
+        Products = await query.ToListAsync();
     }
 
     public async Task<IActionResult> OnPostDeleteAsync(int id) {

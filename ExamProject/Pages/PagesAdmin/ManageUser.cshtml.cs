@@ -76,5 +76,15 @@ namespace ExamProject.Pages.PagesAdmin
 
             return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostDeleteAsync (string id) {
+            var userToDelete = await user.FindByIdAsync(id);
+            if (userToDelete != null) {
+
+                await user.DeleteAsync(userToDelete);
+            }
+
+            return RedirectToPage();
+        }
     }
 }

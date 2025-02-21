@@ -31,6 +31,12 @@
                         </form>
                     </td>
                 }
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@user.Id"
+                          onsubmit="return confirm('Удалить пользователя @user.Email?')">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

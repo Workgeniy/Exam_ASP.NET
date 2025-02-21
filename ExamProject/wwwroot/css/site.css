@@ -20,3 +20,65 @@ html {
 body {
   margin-bottom: 60px;
 }
+table {
+    width:max-content;
+    font-size: 16px;
+}
+
+.login {
+    background-color: #CCCCFF;
+    text-align: center;
+    width: 700px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.divLogin{
+    display: flex;
+    text-align: center;
+    align-content:center;
+    justify-content:center;
+}
+
+.butt {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #6a5acd;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.divRight {
+    justify-content: right;
+    align-content: end;
+}
+
+.table {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+    .table thead th {
+        background-color: #343a40; /* Темный заголовок */
+        color: #ffffff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.table-bordered td, .table-bordered th {
+    border-color: #dee2e6;
+}
+
+

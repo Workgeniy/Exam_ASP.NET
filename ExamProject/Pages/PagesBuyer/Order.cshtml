@@ -1,11 +1,10 @@
 ﻿@page
 @model ExamProject.Pages.PagesBuyer.OrderModel
-<h2>Оформить заказ на сумму @Model.Summa?</h2>
-
-<form method="post">
-    <button type="submit" class="btn btn-primary">Оформить</button>
-</form>
-
-<div>
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Оформить заказ на сумму @Model.Summa?</h2>
     <a class="btn btn-primary" asp-page="PageCart">Вернуться в корзину</a>
 </div>
+
+<form method="post">
+    <button type="submit" class="btn btn-success">Оформить</button>
+</form>
