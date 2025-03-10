@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExamProject.Data.ShopDb {
+namespace ServerExam.Data.ShopDb {
     public class Cart {
 
         [Key]
